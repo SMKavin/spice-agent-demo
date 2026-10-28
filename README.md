@@ -32,7 +32,7 @@ task + tool description ──► LLM ──► tool call (netlist)
 - Simulations: 4
 - Log: [`sample_run_2.txt`](sample_run_2.txt)
 
-**Observations:** In Example 2 the agent's first estimate ignored the 10 kΩ load, so it missed by 7.6% and had to iterate. Its search was not monotonic (it tried 130 Ω after 150 Ω was already too high), but simulation feedback kept it converging to a correct design. It also correctly accounted for the load's voltage division when setting the −3 dB target.
+**Observations:** In Example 2 the agent's first estimate ignored the 10 kΩ load, so it missed by 7.6% and had to iterate. Its search was not monotonic (it tried 130 Ω after 150 Ω was already too high), but simulation feedback kept it converging to a correct design.
 
 ## Setup
 
@@ -49,10 +49,4 @@ The script uses the OpenAI-compatible Chat Completions API, so it works with Gro
 ## Notes
 
 - Older ngspice versions fail on `.meas` lines that use functions like `vm()` or `vdb()`. The task prompt therefore instructs the model to put the analysis inside a `.control` block.
-- Each API call has a 90 s timeout, and the loop is capped at `MAX_STEPS` iterations.
-
-## Next steps
-
-- Transistor-level circuits using SKY130 PDK models (e.g., common-source amplifier sizing)
-- Multiple tools (DC operating point, transient, noise)
-- Interfacing with Cadence Virtuoso/Spectre via virtuoso-bridge-lite
+- Each API call has a 90 s timeout, and the loop is capped at `MAX_STEPS` iteration
